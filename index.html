@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moja żona</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <header>
+        <h1>Kocham Olimpie już:</h1>
+        <section id="container">
+            <p class="liczby" id="lat"></p>
+            <p class="liczby" id="dni"></p>
+            <p class="liczby" id="godziny"></p>
+            <p class="liczby" id="minuty"></p>
+            <p class="liczby" id="sekundy"></p> 
+        </section>
+        
+    </header>
+    <main>
+        <section id="blok">
+            <section id="content">
+                <h2>POWODY DLA KTÓRYCH KOCHAM MOJĄ DZIEWCZYNĘ</h2>
+
+                <h1>Powód <span id="powod">1</span></h1>
+
+                <h3 id="dlaczego">Zawsze mnie wspiera</h2>
+            </section>
+            <section id="przyciski">
+                <div id="lewo" onclick="wczesniejszy()"><<</div>
+                <div id="prawo" onclick="nastepny()">>></div>
+            </section>
+        </section>
+    </main>
+    <footer><h1>BARDZO CIE KOCHAM OLIMPIA, NIGDY SIĘ NIE ZMIENIAJ!</h1></footer>
+    
+</body>
+<script>
+    let teraz = new Date();
+    let dzien = new Date("Nov 7 2023 23:21:01");
+
+    let sekundy = Math.abs(teraz-dzien)/1000;
+    let minuty = parseInt(sekundy/60);
+    let godziny = parseInt(minuty/60);
+    let dni = parseInt(godziny/24);
+    let lat = parseInt(dni/365);
+
+    sekundy = parseInt((sekundy-minuty*60));
+    minuty = parseInt((minuty-godziny*60));
+    godziny = parseInt((godziny-dni*24));
+    dni = parseInt((dni-lat*365));
+
+    let box_lat = document.getElementById("lat");
+    box_lat.innerHTML = "Lat: <br>" + lat;
+
+    let box_dni = document.getElementById("dni");
+    box_dni.innerHTML = "Dni: <br>" + dni;
+
+    let box_godziny = document.getElementById("godziny");
+    box_godziny.innerHTML = "Godziny: <br>" + godziny;
+
+    let box_minuty = document.getElementById("minuty");
+    box_minuty.innerHTML = "Minut: <br>" + minuty;
+
+    let box_sekundy = document.getElementById("sekundy");
+    box_sekundy.innerHTML = "Sekund: <br>" + sekundy;
+
+    const apiData = [
+            { id: 1, reason: 'Zawsze mnie wspiera' },
+            { id: 2, reason: 'Jest śmieszna (trochę)' },
+            { id: 3, reason: 'Troskliwa i opiekuńcza' },
+            { id: 4, reason: 'Potrafi mnie wysłuchać' },
+            { id: 5, reason: 'Lojalna' },
+            { id: 6, reason: 'Ma Piękny uśmiech' },
+            { id: 7, reason: 'Ładnie Się Ubiera' },
+            { id: 8, reason: 'Jest Empatyczna (czasem)' },
+            { id: 9, reason: 'Mamy Wspólne zainteresowania' },
+            { id: 10, reason: 'Inteligentna i mądra' },
+            { id: 11, reason: 'Dba o relacje' },
+            { id: 12, reason: 'Szczera i otwarta' },
+            { id: 13, reason: 'Pomocna' },
+            { id: 14, reason: 'Za to że mnie kocha'},
+            { id: 15, reason: 'Dba o siebie' },
+            { id: 16, reason: 'Piękne oczy' },
+            { id: 17, reason: 'Wierzy we mnie' },
+            { id: 18, reason: 'Odpowiedzialna (tylko trochę)' },
+            { id: 19, reason: 'Tworzy super atmosferę' },
+            { id: 20, reason: 'Jest Moją Najlepszą przyjaciółką' },
+            { id: 21, reason: 'Uwielbiam jej zapach' },
+            { id: 22, reason: 'Daje mi wsparcie' },
+            { id: 23, reason: 'Jest silna' },
+            { id: 24, reason: 'Miłość mojego życia' },
+            { id: 25, reason: 'Ma piękną figurę'}
+        ];
+
+        let licznik = 1;
+        let numer_powodu = document.getElementById("powod");
+        let dlaczego = document.getElementById("dlaczego");
+
+        function wczesniejszy(){
+            if(licznik == 1){
+                licznik = licznik;
+            }
+            else{
+                licznik = licznik - 1;
+            }
+
+            numer_powodu.innerHTML = licznik;
+            aktualizujPowod();
+
+        }
+
+        function nastepny(){
+            if(licznik == 25){
+                licznik = licznik;
+            }
+            else{
+                licznik = licznik + 1;
+            }
+
+            numer_powodu.innerHTML = licznik;
+            aktualizujPowod();
+        }
+
+        function aktualizujPowod() {
+            const powod = apiData.find(item => item.id === licznik);
+            if (powod) {
+                numer_powodu.innerHTML = powod.id;
+                dlaczego.innerHTML = powod.reason;
+            }
+        }
+
+</script>
+</html>
